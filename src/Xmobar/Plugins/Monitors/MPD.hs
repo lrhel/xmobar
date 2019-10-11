@@ -105,7 +105,7 @@ parseMPD (Right st) song opts = do
         ppos = maybe "" (int2str . (+1)) $ M.stSongPos st
         flags = playbackMode st
 
-stateGlyph :: M.PlaybackState -> MOpts -> String
+stateGlyph :: M.State -> MOpts -> String
 stateGlyph s o =
   case s of
     M.Playing -> mPlaying o
