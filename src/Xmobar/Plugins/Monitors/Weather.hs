@@ -51,7 +51,6 @@ weatherConfig = mkMConfig
        , "dewPointF"
        , "rh"
        , "pressure"
-       , "skipat"
        ]
 
 data WindInfo =
@@ -80,7 +79,6 @@ data WeatherInfo =
        , dewPointF    :: Int
        , humidity     :: Int
        , pressure     :: Int
-       , skipat       :: Maybe IconPattern
        } deriving (Show)
 
 pTime :: Parser (String, String, String, String)
@@ -207,9 +205,8 @@ formatWeather sks [WI st ss y m d h (WindInfo wc wa wm wk wkh wms) v sk tC tF dC
     do cel <- showWithColors show tC
        far <- showWithColors show tF
        let sk' = formatSk sks (map toLower sk)
-       let skipat = sk'
        parseTemplate [st, ss, y, m, d, h, wc, wa, wm, wk, wkh
-                     , wms, v, sk, sk', cel, far, skipat
+                     , wms, v, sk, sk', cel, far
                      , show dC, show dF, show r , show p ]
 formatWeather _ _ = getConfigValue naString
 
